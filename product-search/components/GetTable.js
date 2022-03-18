@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import SearchBar from "./SearchBar";
 import axios from "axios"
+import Spinner from "./Spinner";
 
 export default function GetTable() {
 
@@ -29,6 +30,7 @@ export default function GetTable() {
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Trips and Attraction</p>
                         <div>
                           <SearchBar/>
+                          <Spinner/>
                         </div>
                     </div>
                 </div>
@@ -50,7 +52,7 @@ export default function GetTable() {
                                 <td className="pl-4 cursor-pointer">
                                     <div className="flex items-center">
                                         <div className="w-120 h-120">
-                                            <img className="w-full h-full rounded-lg" src={trip.img_sml} />
+                                            <img className="w-full h-full rounded-lg" src={trip.img_sml}/>
                                         </div>
                                         {/* <div className="pl-4">
                                             <p className="font-medium">{trip.dest}</p>
