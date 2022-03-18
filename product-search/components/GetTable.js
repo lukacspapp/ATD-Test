@@ -23,8 +23,8 @@ export default function GetTable() {
 
     return (
         <>
-            <div className="w-full sm:px-6">
-                <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
+            <div className="w-full sm:px-6 m-5 p-2">
+                <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100  rounded-tl-lg rounded-tr-lg">
                     <div className="sm:flex items-center justify-around">
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Trips and Attraction</p>
                         <div>
@@ -35,8 +35,8 @@ export default function GetTable() {
                 <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
                     <table className="w-full whitespace-nowrap">
                         <thead>
-                            <tr className="h-16 w-full text-sm leading-none text-gray-800">
-                                <th className="font-bold text-lg text-left pl-4">Image</th>
+                            <tr className="h-16 w-full text-xl leading-none text-gray-800">
+                                <th className="font-normal text-left pl-4">Image</th>
                                 <th className="font-normal text-left pl-12">Title</th>
                                 <th className="font-normal text-left pl-12">Price for Adults</th>
                                 <th className="font-normal text-left pl-20">Price for Child</th>
@@ -50,7 +50,7 @@ export default function GetTable() {
                                 <td className="pl-4 cursor-pointer">
                                     <div className="flex items-center">
                                         <div className="w-120 h-120">
-                                            <img className="w-full h-full" src={trip.img_sml} />
+                                            <img className="w-full h-full rounded-lg" src={trip.img_sml} />
                                         </div>
                                         {/* <div className="pl-4">
                                             <p className="font-medium">{trip.dest}</p>
@@ -59,17 +59,14 @@ export default function GetTable() {
                                     </div>
                                 </td>
                                 <td className="pl-12">
-                                    <p className="text-sm font-medium leading-none text-gray-800">{trip.title}</p>
-                                    <div className="w-24 h-3 bg-gray-100 rounded-full mt-2">
-                                        <div className="w-20 h-3 bg-green-progress rounded-full" />
-                                    </div>
+                                    <p className="text-lg font-medium leading-none text-gray-800">{trip.title}</p>
                                 </td>
                                 <td className="pl-12">
-                                    <p className="font-medium">from $<span>{trip.price_from_adult}</span></p>
+                                    <p className="font-medium text-lg text-green-500">from ${trip.price_from_adult}</p>
                                     <p className="text-xs leading-3 text-gray-600 mt-2">5 tasks pending</p>
                                 </td>
                                 <td className="pl-20">
-                                    <p className="font-medium">from $<span>{trip.price_from_child}</span></p>
+                                    <p className="font-medium text-lg text-green-500">from ${trip.price_from_child}</p>
                                     <p className="text-xs leading-3 text-gray-600 mt-2">$4,200 left</p>
                                 </td>
                                 <td className="pl-20">
