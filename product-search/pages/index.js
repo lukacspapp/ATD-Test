@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import GetTable from '../components/GetTable'
 import SearchBar from '../components/SearchBar'
 import Table from '../components/Table'
+
 
 
 export default function Home() {
@@ -13,7 +15,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <Table />
+        <GetTable />
       </main>
     </div>
   )
