@@ -14,8 +14,9 @@ export default function GetTable() {
     const getData = async () => {
       setLoad(true)
       try {
-        const { data } = await axios.get('https://global.atdtravel.com/api/products?geo=en&offset=2&limit=10')
+        const { data } = await axios.get('https://global.atdtravel.com/api/products?geo=en&offset=2&limit=100')
         setTrips(data.data)
+        setLoad(false)
         console.log(meta)
       } catch (err) {
         setHasError(true)

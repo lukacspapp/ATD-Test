@@ -12,3 +12,8 @@ const {
       );
 
 How to get the the meta info, need investigation.
+Error handling and loading stage -> Making sure to check the response array.length
+Pagination when we scroll into view we should call th api next page 
+also the filter.
+
+
