@@ -3,7 +3,7 @@ import SearchIcon from "./SearchIcon";
 
 export default function SearchBar() {
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     console.log('Sanyi')
   }
 

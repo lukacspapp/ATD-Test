@@ -8,12 +8,15 @@ export default function GetTable() {
   const [trips,setTrips] = useState([])
   const [error,setError] = useState(false)
   const [load,setLoad] = useState(true)
+  const [meta, setMeta] = useState([])
   
   useEffect(() => {
     const getData = async () => {
+      setLoad(true)
       try {
-        const { data } = await axios.get('https://global.atdtravel.com/api/products?geo=en')
+        const { data } = await axios.get('https://global.atdtravel.com/api/products?geo=en&offset=2&limit=10')
         setTrips(data.data)
+        console.log(meta)
       } catch (err) {
         setHasError(true)
       }
@@ -24,7 +27,7 @@ export default function GetTable() {
 
     return (
         <>
-            <div className="w-full sm:px-6 m-5 p-2">
+            <div className="w-full sm:px-6"> // todo : make it responsive 
                 <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100  rounded-tl-lg rounded-tr-lg">
                     <div className="sm:flex items-center justify-around">
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Trips and Attraction</p>
@@ -69,7 +72,7 @@ export default function GetTable() {
                                 </td>
                                 <td className="pl-20">
                                     <p className="font-medium text-lg text-green-500">from ${trip.price_from_child}</p>
-                                    <p className="text-xs leading-3 text-gray-600 mt-2">$4,200 left</p>
+                                    <p className="text-xs leading-3 text-gray-600 mt-2">{trip.price_from_all[0].desc}</p> // I can not access to the second element 
                                 </td>
                                 <td className="pl-20">
                                     <p className="font-medium">{trip.dest}</p>

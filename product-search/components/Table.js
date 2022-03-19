@@ -78,7 +78,6 @@ export default function Table() {
 //                         })}
                         
 //                         </tbody>
-//                     </table>
 //                 </div>
 //             </div>
 //         </div>
@@ -86,3 +85,4 @@ export default function Table() {
 //   </section>
 //   )
 }
+
