@@ -1,9 +1,6 @@
-import Head from 'next/head'
-import GetTable from '../components/GetTable'
-import SearchBar from '../components/SearchBar'
-import Table from '../components/Table'
+import Head from "next/head";
 
-
+import Table from "../components/Table";
 
 export default function Home() {
   return (
@@ -15,8 +12,8 @@ export default function Home() {
       </Head>
 
       <main>
-        <GetTable />
+        <Table />
       </main>
     </div>
-  )
+  );
 }

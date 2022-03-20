@@ -1,88 +1,128 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Image from "next/image";
+
 import SearchBar from "./SearchBar";
-import SearchIcon from "./SearchIcon";
-export default function Table() {
+import Spinner from "./Spinner";
 
-  // const [trips,setTrips] = useState([])
-  // const [error,setError] = useState(false)
-  // const [load,setLoad] = useState(true)
-  
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const { data } = await axios.get('https://global.atdtravel.com/api/products?geo=en')
-  //       setTrips(data.data)
-  //     } catch (err) {
-  //       setHasError(true)
-  //     }
-  //   }
-  //   getData()
-  // }, [])
+export default function GetTable() {
+  const [trips, setTrips] = useState();
+  const [meta, setMeta] = useState();
 
-  
-    
+  const [paginationOffset, setPaginationOffset] = useState(0);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {
+          data: { meta },
+          data: { data },
+        } = await axios.get(
+          `https://global.atdtravel.com/api/products?geo=en&offset=${paginationOffset}&limit=10`
+        );
 
+        setTrips(data);
+        setMeta(meta);
 
+        console.log(data);
+        console.log(meta);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+      }
+    };
 
-//   return (
-//     <section class="flex-wrap antialiased justify-center  bg-gray-100 text-gray-600 h-screen px-4 max-h-full">
-//       <div class="flex flex-wrap flex-col align-middle justify-center max-h-full">
-//         <div class="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-sm border m-6 border-gray-200 max-h-full">
-//             <header class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-//                 <h2 class="font-semibold text-gray-800">Trips and Attractions</h2>
-//                 <SearchBar />
-//             </header>
-            
-//             <div class="p-3">
-//                 <div class="overflow-x-auto">
-//                     <table class="table-auto w-full">
-//                         <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-//                             <tr>
-//                                 <th class="p-2 whitespace-nowrap">
-//                                     <div class="font-semibold text-left"></div>
-//                                 </th>
-//                                 <th class="p-2 whitespace-nowrap">
-//                                     <div class="font-semibold text-left">Title</div>
-//                                 </th>
-//                                 <th class="p-2 whitespace-nowrap">
-//                                     <div class="font-semibold text-left">Price</div>
-//                                 </th>
-//                                 <th class="p-2 whitespace-nowrap">
-//                                     <div class="font-semibold text-center">Destination</div>
-//                                 </th>
-//                             </tr>
-//                         </thead>
-//                         <tbody class="text-sm divide-y divide-gray-100">
-//                         {trips.map((trip) => {
-//                           return (
-//                             <tr>
-//                                 <td class="p-2 whitespace-nowrap">
-//                                     <div class="flex items-center">
-//                                         <div class="w-20 h-20 object-fill flex-shrink-0 mr-2 sm:mr-3"><img class="h-20 w-60 rounded-lg" src={trip.img_sml} width="15" height="70" alt="Alex Shatov"/></div>
-//                                     </div>
-//                                 </td>
-//                                 <td class="p-2 whitespace-nowrap">
-//                                     <div class="text-left text-xl">{trip.title}</div>
-//                                 </td>
-//                                 <td class="p-2 whitespace-nowrap">
-//                                     <div class="text-lg font-medium text-green-500">{trip.price_from_adult}</div>
-//                                 </td>
-//                                 <td class="p-2 whitespace-nowrap">
-//                                     <div class="text-lg text-center">{trip.dest}</div>
-//                                 </td>
-//                             </tr>
-//                           )
-//                         })}
-                        
-//                         </tbody>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//   </section>
-//   )
+    fetchData();
+  }, []);
+
+  if (error) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <h2>There was an error</h2>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full sm:px-6">
+      <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100  rounded-tl-lg rounded-tr-lg">
+        <div className="sm:flex items-center justify-around">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+            Trips and Attractions
+          </p>
+          <div>
+            <SearchBar />
+          </div>
+        </div>
+      </div>
+      <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
+        <table className="w-full whitespace-nowrap">
+          <thead>
+            <tr className="h-16 w-full text-xl leading-none text-gray-800">
+              <th className="font-normal text-left pl-4">Image</th>
+              <th className="font-normal text-left pl-12">Title</th>
+              <th className="font-normal text-left pl-12">Price for Adults</th>
+              <th className="font-normal text-left pl-20">Price for Child</th>
+              <th className="font-normal text-left pl-20">Destination</th>
+            </tr>
+          </thead>
+          <tbody className="w-full">
+            {trips.map(({ id, img_sml, title, price_from_all, dest }) => (
+              <tr
+                key={id}
+                className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
+              >
+                <td className="pl-4 cursor-pointer">
+                  <div className="flex items-center">
+                    <div className="w-120 h-120">
+                      <Image
+                        className="rounded-lg"
+                        src={img_sml}
+                        height={230}
+                        width={307}
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td className="pl-12">
+                  <p className="text-lg font-medium leading-none text-gray-800">
+                    {title}
+                  </p>
+                </td>
+                {price_from_all.map(
+                  ({ desc, price_from, type_description }) => (
+                    <td key={desc} className="pl-12">
+                      <p className="font-medium text-lg text-green-500">
+                        from ${price_from}
+                      </p>
+                      <p className="text-xs leading-3 text-gray-600 mt-2">
+                        {type_description}
+                      </p>
+                    </td>
+                  )
+                )}
+                <td className="pl-20">
+                  <p className="font-medium">{dest}</p>
+                  <p className="text-xs leading-3 text-gray-600 mt-2">
+                    34 days
+                  </p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
-

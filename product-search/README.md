@@ -16,4 +16,6 @@ Error handling and loading stage -> Making sure to check the response array.leng
 Pagination when we scroll into view we should call th api next page 
 also the filter.
 
+can we do Lazy loading/ with next? 
+
 
