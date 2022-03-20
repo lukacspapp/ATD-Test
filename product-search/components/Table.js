@@ -15,7 +15,7 @@ export default function GetTable() {
   const [loading, setLoading] = useState(true); // state for loading that is set to true by deafult until we have the data
   const [error, setError] = useState(undefined); // state for error
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchData = async () => {
       setLoading(true); // loading sign is on until I have the data
       try {
@@ -44,7 +44,7 @@ export default function GetTable() {
     };
 
     fetchData();
-  }, [paginationOffset, searchTerm]); // fetchData fucntion gets called once the search term or the pagination changes
+  }, [paginationOffset, searchTerm]); // fetchData function gets called once the search term or the pagination changes
 
   if (loading) {
     // if loading true than a spinner appear
@@ -64,14 +64,14 @@ export default function GetTable() {
           </p>
           <div>
             <SearchBar
-              setSearchTerm={setSearchTerm}
+              setSearchTerm={setSearchTerm} 
               setPaginationOffset={setPaginationOffset}
             />
           </div>
         </div>
       </div>
       <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
-        {error ? (
+        {error ? ( // if there is error it will display a message
           <div className="h-screen w-screen flex items-center justify-center">
             <h2>{error}</h2>
           </div>
@@ -89,7 +89,7 @@ export default function GetTable() {
               </tr>
             </thead>
             <tbody className="w-full">
-              {trips.map(
+              {trips.map( // mapping over the items to be able to display them
                 ({ id, img_sml, title, price_from_adult, dest }, index) => (
                   <tr
                     key={id}
@@ -120,9 +120,6 @@ export default function GetTable() {
                     </td>
                     <td className="pl-20">
                       <p className="font-medium">{dest}</p>
-                      <p className="text-xs leading-3 text-gray-600 mt-2">
-                        34 days
-                      </p>
                     </td>
                   </tr>
                 )
@@ -131,11 +128,11 @@ export default function GetTable() {
           </table>
         )}
 
-        {totalCount > 10 && totalCount - paginationOffset > 10 && (
+        {totalCount > 10 && totalCount - paginationOffset > 10 && ( // if we have more than 10 in the total count then display the button
           <button
             type="button"
             className="flex items-center justify-center h-16 w-32 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 hover:cursor-pointer mx-auto my-6"
-            onClick={() => setPaginationOffset(paginationOffset + 10)}
+            onClick={() => setPaginationOffset(paginationOffset + 10)} // once the button is clicked we update the pagination by 10 and it will show us the next 10 or less items
           >
             Load more...
           </button>
