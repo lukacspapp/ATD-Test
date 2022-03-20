@@ -14,10 +14,13 @@ export default function SearchBar({ setSearchTerm, setPaginationOffset }) {
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
-          setPaginationOffset(0);
         }}
       />
-      <button onClick={() => setSearchTerm(title)}>
+      <button onClick={() => {
+        setSearchTerm(title);
+        setPaginationOffset(0)
+        }}
+      >
         <span className="w-auto flex justify-end items-center text-grey p-2">
           <SearchIcon />
         </span>

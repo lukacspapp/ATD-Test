@@ -128,7 +128,7 @@ export default function GetTable() {
           </table>
         )}
 
-        {totalCount > 10 && totalCount - paginationOffset > 10 && ( // if we have more than 10 in the total count then display the button
+        {totalCount > 10 && totalCount - paginationOffset > 10 && ( // if we have more than 10 in the total count then display the button and if we have less than 10 in the total count then the button will disappear
           <button
             type="button"
             className="flex items-center justify-center h-16 w-32 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 hover:cursor-pointer mx-auto my-6"

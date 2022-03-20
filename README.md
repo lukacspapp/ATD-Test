@@ -7,13 +7,13 @@
 
 ## Goal:
 
- Create a simple product search page like the one below using whatever language/tech you feel is best and fetching the content from our API.
+ Create a simple product search page like the one below using whatever language/tech you feel is best and fetching the content from ATD's API.
 
 ## Technologies Used
 
 - ATD's API
 - React.js
-- HTML 5.
+- HTML 5
 - Javascript 
 - Next.js
 - Tailwind
