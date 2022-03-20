@@ -7,8 +7,7 @@
 
 ## Goal:
 
-1. Write a short description explaining to another developer how you would approach building the product search below.
-2. Create a simple product search page like the one below using whatever language/tech you feel is best and fetching the content from our API.
+ Create a simple product search page like the one below using whatever language/tech you feel is best and fetching the content from our API.
 
 ## Technologies Used
 
@@ -21,5 +20,8 @@
 
 ## Code Installation
 
-
+- Clone or download the repo
+- Cd to product-search folder
+- Install dependencies in Terminal by typing:<code>npm i</code> 
+- Start server with <code>npm run dev</code>
 
