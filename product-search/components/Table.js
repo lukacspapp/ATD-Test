@@ -6,45 +6,48 @@ import SearchBar from "./SearchBar";
 import Spinner from "./Spinner";
 
 export default function GetTable() {
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState([]); // state for rendered items
 
-  const [paginationOffset, setPaginationOffset] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [paginationOffset, setPaginationOffset] = useState(0); // state for pagination it will be increased by 10
+  const [totalCount, setTotalCount] = useState(0); // state for items that will return from the search
+  const [searchTerm, setSearchTerm] = useState(""); // state for the search term
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(undefined);
+  const [loading, setLoading] = useState(true); // state for loading that is set to true by deafult until we have the data
+  const [error, setError] = useState(undefined); // state for error
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true); // loading sign is on until I have the data
       try {
         const {
-          data: { meta },
-          data: { data },
+          data: { meta }, // deconstracting meta data for the for the pagination and the counting of the items
+          data: { data }, // decontructing data for rendering
         } = await axios.get(
+          // axois request will translate the data into JSON by default
           `https://global.atdtravel.com/api/products?geo=en&offset=${paginationOffset}&limit=10&title=${searchTerm}`
         );
 
         if (meta.total_count !== totalCount) {
-          setTrips(data);
+          // When the total count that is in state is not equal the total count from the new request,
+          setTrips(data); // replace the trips state with the new data
         } else {
-          setTrips([...trips, ...data]);
+          setTrips([...trips, ...data]); // otherwise spread the new data into the trips state with the previous data. // Edgecase if the array has the same ammount of trips for the same search term it will not update the page?
         }
 
-        setTotalCount(meta.total_count);
-        setLoading(false);
-        setError(undefined);
+        setTotalCount(meta.total_count); // We are setting the total count state to the new request count
+        setLoading(false); // Set loading false on a successful request
+        setError(undefined); // Sett Err undefined incase we had an error before
       } catch (err) {
-        setError(err.response.data.err_desc);
-        setLoading(false);
+        setError(err.response.data.err_desc); // displaying error message
+        setLoading(false); // then loading is false
       }
     };
 
     fetchData();
-  }, [paginationOffset, searchTerm]);
+  }, [paginationOffset, searchTerm]); // fetchData fucntion gets called once the search term or the pagination changes
 
   if (loading) {
+    // if loading true than a spinner appear
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <Spinner />

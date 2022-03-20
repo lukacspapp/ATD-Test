@@ -3,7 +3,7 @@ import { useState } from "react";
 import SearchIcon from "./SearchIcon";
 
 export default function SearchBar({ setSearchTerm, setPaginationOffset }) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(""); //  local state for input field
 
   return (
     <div className="m-4 flex max-w-md place-self-center rounded-full border">
