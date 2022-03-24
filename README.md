@@ -22,6 +22,6 @@
 
 - Clone or download the repo
 - Cd to product-search folder
-- Install dependencies in Terminal by typing:<code>npm i</code> 
-- Start server with <code>npm run dev</code>
+- Install dependencies in Terminal by typing:<code>npm i</code> or <code>yarn</code>
+- Start server with <code>npm run dev</code> or <code>yarn dev</code>
 
