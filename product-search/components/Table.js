@@ -27,7 +27,7 @@ export default function GetTable() {
           `https://global.atdtravel.com/api/products?geo=en&offset=${paginationOffset}&limit=10&title=${searchTerm}`
         );
 
-        if (meta.total_count !== totalCount) {
+        if (meta.total_count !== totalCount) { // edge case !!!
           // When the total count that is in state is not equal the total count from the new request,
           setTrips(data); // replace the trips state with the new data
         } else {
